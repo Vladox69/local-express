@@ -1,11 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Store, Car } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Hero from "@/components/Hero";
+import DeliverySection from "@/components/delivery/DeliverySection";
+import TransportSection from "@/components/transport/TransportSection";
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState("delivery");
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      <Hero />
+      
+      <div className="container mx-auto px-4 py-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+            <TabsTrigger value="delivery" className="flex items-center gap-2">
+              <Store className="w-4 h-4" />
+              Delivery
+            </TabsTrigger>
+            <TabsTrigger value="transport" className="flex items-center gap-2">
+              <Car className="w-4 h-4" />
+              Transporte
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="delivery">
+            <DeliverySection />
+          </TabsContent>
+
+          <TabsContent value="transport">
+            <TransportSection />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
